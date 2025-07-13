@@ -52,7 +52,16 @@ while ($continueCreating) {
     Write-Host "`n"
 }
 
-Write-Host "--- All custom distros have been created "
+Write-Host "Cleaning up: Deleting the base image TAR file '$baseImagePath'..."
+try {
+    Remove-Item -Path $baseImagePath -Force -ErrorAction Stop
+    Write-Host "  Successfully deleted '$baseImagePath'."
+} catch {
+    Write-Warning "Failed to delete the base image TAR file '$baseImagePath'. Error: $($_.Exception.Message)"
+    Write-Host "You may need to manually delete it."
+}
+
+Write-Host "--- All custom distros have been created and base tar image has been deleted"
 Write-Host "Listing current distros installed"
 wsl.exe -l -v
 
