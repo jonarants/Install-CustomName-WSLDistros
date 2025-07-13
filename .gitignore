@@ -1,0 +1,3 @@
+# Ignore WSL base image and custom distro folders
+/base/
+/distros/
